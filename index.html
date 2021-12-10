@@ -107,7 +107,7 @@
                     <span class="material-icons">
                         search
                     </span>
-                        <input type="search" name="search" placeholder="Search">
+                        <input type="text" id="searchBar" name="search" placeholder="Search">
                 </div>
                 <div class="container">
                     <nav class="navbar">
@@ -146,16 +146,20 @@
             </div>
             <div class="col-md-2" style="margin-top: 1em;">
                 <div class="head">
-                    <button class="right">
-                        <span class="material-icons" style="padding: 5px; font-size: 30px;">
-                            brightness_7
-                        </span>
-                    </button>   
-                    <br>
-                    <h6 style="margin-top: 1em;font-size:1.5em">It's hot today!</h6>
-                    <p style="font-weight: 200;">
-                        Be sure to grap a bottle of cold water
-                    </p>
+                        <div class="container">
+                            <card class="cities">
+                                <img src="" width="50px" height="50px" class="tempIcon" >
+                                <h3 class="searchCity">
+
+                                </h3>
+                                <h5 class="searchTemp">
+
+                                </h5>
+                                <p class="searchDesc">
+
+                                </p>
+                            </card>
+                        </div>
                 </div>
                 <div class="mid">
                     <h6 style="margin-top: 2em; font-weight: 300;">INFO</h6>
@@ -243,4 +247,46 @@
         </div>
     </div>
 </body>
+<script>
+    const searchBar = document.getElementById('searchBar');
+
+    console.log(searchBar);
+    var city;
+    const list = document.getElementsByClassName(".container .cities")
+    api = '14b2095f71441aece243149714eadba2';
+    searchBar.addEventListener('keyup', (e) => {
+        if(e.keyCode == 13){
+            city = e.target.value;
+            url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api}`;
+            fetch(url).then(response => response.json())
+            .then(data=>{
+                console.log(data);
+                const { name } = data;
+                const { icon, description } = data.weather[0];
+                const { temp } = data.main;
+                let cel = 0;
+                cel = temp - 273;
+
+                document.querySelector(".searchCity").innerText = name;
+                document.querySelector(".tempIcon").src="https://openweathermap.org/img/wn/"+icon+".png";
+                document.querySelector(".searchTemp").innerText = Math.round(cel)+"°C";
+                document.querySelector(".searchDesc").innerText = description
+                // const icon = `https://openweatherthermap.org/img/wn/${weather[0]["icon"]}@2x.png`;
+
+                // const markup = `
+                //     <h2 class="cityName" data-name="${name},${sys.country}"></h2>
+
+                //     <figure>
+                //         <img class-"city-icon" src=${icon} alt=${weather[0]["main"]}>
+                //         <figCaption>${weather[0]["description"]}</figcaption>
+                //     </figure>
+                // `;
+                // const { name } = data;
+                // document.querySelector(".card-title").innerText = name;
+
+                // document.querySelector(".card-body").innerHTML =  markup;
+            })
+        }
+});
+</script>
 </html>
