@@ -16,6 +16,9 @@
     <!--Google icons-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+  
 
 </head>
 <body>
@@ -246,47 +249,9 @@
             </div>
         </div>
     </div>
+      <!-- local js -->
+      <script type="text/javascript" src="config.js"></script>
+      <script src="main.js"></script>
 </body>
-<script>
-    const searchBar = document.getElementById('searchBar');
 
-    console.log(searchBar);
-    var city;
-    const list = document.getElementsByClassName(".container .cities")
-    api = '14b2095f71441aece243149714eadba2';
-    searchBar.addEventListener('keyup', (e) => {
-        if(e.keyCode == 13){
-            city = e.target.value;
-            url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api}`;
-            fetch(url).then(response => response.json())
-            .then(data=>{
-                console.log(data);
-                const { name } = data;
-                const { icon, description } = data.weather[0];
-                const { temp } = data.main;
-                let cel = 0;
-                cel = temp - 273;
-
-                document.querySelector(".searchCity").innerText = name;
-                document.querySelector(".tempIcon").src="https://openweathermap.org/img/wn/"+icon+".png";
-                document.querySelector(".searchTemp").innerText = Math.round(cel)+"°C";
-                document.querySelector(".searchDesc").innerText = description
-                // const icon = `https://openweatherthermap.org/img/wn/${weather[0]["icon"]}@2x.png`;
-
-                // const markup = `
-                //     <h2 class="cityName" data-name="${name},${sys.country}"></h2>
-
-                //     <figure>
-                //         <img class-"city-icon" src=${icon} alt=${weather[0]["main"]}>
-                //         <figCaption>${weather[0]["description"]}</figcaption>
-                //     </figure>
-                // `;
-                // const { name } = data;
-                // document.querySelector(".card-title").innerText = name;
-
-                // document.querySelector(".card-body").innerHTML =  markup;
-            })
-        }
-});
-</script>
 </html>
