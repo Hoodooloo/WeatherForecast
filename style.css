@@ -5,7 +5,7 @@ body{
     background-color: #f9fafe;
     border-radius: 10px;
 }
-.col-lg-8{
+.col-lg-7{
     background-color: #2149ab;
     color:white;
     border-radius: 10px;
@@ -16,7 +16,7 @@ body{
     font-size: 25px;
     font-weight: bold;
 }
-.col-md-2{
+.col-md-3{
     background-color: #008cee;
     color: white;
     border-radius: 10px;
@@ -68,4 +68,10 @@ button{
     color: grey;
     /*       */
     background-color: #edeef5;
+}
+.info{
+    font-size: 15px;
+}
+.info:hover{
+    font-size: 25px;
 }
